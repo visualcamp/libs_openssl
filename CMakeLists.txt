@@ -45,6 +45,11 @@ endif()
 
 set (OPENSSL_INCLUDE_PATH "${OPENSSL_PATH}/include")
 
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  if (${CMAKE_HOST_SYSTEM_PROCESSOR} MATCHES "arm64")
+    set (OPENSSL_INCLUDE_PATH "${OPENSSL_PATH}/include-latest")
+  endif ()
+endif ()
 message(" - OpenSSL library path: ${OPENSSL_LIB_PATH}")
 message(" - Crypto  library path: ${CRYPTO_LIB_PATH}")
 message(" - OpenSSL include path: ${OPENSSL_INCLUDE_PATH}")
