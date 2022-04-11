@@ -25,8 +25,14 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "iOS")
   set (CRYPTO_LIB_PATH  "${OPENSSL_PATH}/lib/ios/libcrypto.a")
   
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  set (OPENSSL_LIB_PATH "${OPENSSL_PATH}/lib/macos/libssl.a")
-  set (CRYPTO_LIB_PATH  "${OPENSSL_PATH}/lib/macos/libcrypto.a")
+  if(${CMAKE_HOST_SYSTEM_PROCESSOR} MATCHES "arm64")
+    set (OPENSSL_LIB_PATH "${OPENSSL_PATH}/lib/macos/arm64/libssl.a")
+    set (CRYPTO_LIB_PATH  "${OPENSSL_PATH}/lib/macos/arm64/libcrypto.a")
+  else()
+    set (OPENSSL_LIB_PATH "${OPENSSL_PATH}/lib/macos/x86_64/libssl.a")
+    set (CRYPTO_LIB_PATH  "${OPENSSL_PATH}/lib/macos/x86_64/libcrypto.a")
+  endif()
+
 
 elseif (UNIX)
   find_package(OpenSSL REQUIRED)
