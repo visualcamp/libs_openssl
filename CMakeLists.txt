@@ -35,9 +35,9 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 
 elseif (UNIX)
-  find_package(OpenSSL REQUIRED)
-  set (OPENSSL_LIB_PATH "")
-  set (CRYPTO_LIB_PATH  "")
+#  find_package(OpenSSL REQUIRED)
+  set (OPENSSL_LIB_PATH "${OPENSSL_PATH}/lib/linux/libssl.a")
+  set (CRYPTO_LIB_PATH  "${OPENSSL_PATH}/lib/linux/libcrypto.a")
 
 else()
   message(FATAL_ERROR "Unknown platform")
